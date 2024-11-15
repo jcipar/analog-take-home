@@ -1,12 +1,15 @@
 import random
 import string
+from typing import List
 
 from sms_message import SmsMessage, MessageBatch
+from stats_collector import StatsCollector
 
 
 class SmsMessageProducer:
-    def __init__(self, message_length:int =100) -> None:
+    def __init__(self, stats_collector: StatsCollector, message_length:int =100) -> None:
         self.message_length = 100
+        self.stats_collector = stats_collector
 
     def generate_message_batch(self, batch_size: int) -> MessageBatch:
         messages: List[SmsMessage] = []
