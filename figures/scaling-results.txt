@@ -1,0 +1,50 @@
+INFO: quick_test.py:69 Starting main()
+INFO: quick_test.py:63 Sending 10 message with 1 senders took 9.786 seconds.
+INFO: quick_test.py:64 1.022 msgs/s. 1.022 msgs/s/sender.
+INFO: quick_test.py:63 Sending 20 message with 2 senders took 10.515 seconds.
+INFO: quick_test.py:64 1.902 msgs/s. 0.951 msgs/s/sender.
+INFO: quick_test.py:63 Sending 40 message with 4 senders took 10.639 seconds.
+INFO: quick_test.py:64 3.760 msgs/s. 0.940 msgs/s/sender.
+INFO: quick_test.py:63 Sending 80 message with 8 senders took 10.335 seconds.
+INFO: quick_test.py:64 7.740 msgs/s. 0.968 msgs/s/sender.
+INFO: quick_test.py:63 Sending 160 message with 16 senders took 10.620 seconds.
+INFO: quick_test.py:64 15.066 msgs/s. 0.942 msgs/s/sender.
+INFO: quick_test.py:63 Sending 320 message with 32 senders took 10.549 seconds.
+INFO: quick_test.py:64 30.334 msgs/s. 0.948 msgs/s/sender.
+INFO: quick_test.py:63 Sending 640 message with 64 senders took 10.670 seconds.
+INFO: quick_test.py:64 59.982 msgs/s. 0.937 msgs/s/sender.
+INFO: quick_test.py:63 Sending 1280 message with 128 senders took 10.578 seconds.
+INFO: quick_test.py:64 121.003 msgs/s. 0.945 msgs/s/sender.
+INFO: quick_test.py:63 Sending 2560 message with 256 senders took 10.766 seconds.
+INFO: quick_test.py:64 237.795 msgs/s. 0.929 msgs/s/sender.
+INFO: quick_test.py:63 Sending 5120 message with 512 senders took 10.721 seconds.
+INFO: quick_test.py:64 477.580 msgs/s. 0.933 msgs/s/sender.
+INFO: quick_test.py:63 Sending 10240 message with 1024 senders took 10.678 seconds.
+INFO: quick_test.py:64 958.998 msgs/s. 0.937 msgs/s/sender.
+INFO: quick_test.py:63 Sending 20480 message with 2048 senders took 10.690 seconds.
+INFO: quick_test.py:64 1915.745 msgs/s. 0.935 msgs/s/sender.
+INFO: quick_test.py:63 Sending 40960 message with 4096 senders took 10.764 seconds.
+INFO: quick_test.py:64 3805.248 msgs/s. 0.929 msgs/s/sender.
+INFO: quick_test.py:63 Sending 81920 message with 8192 senders took 10.807 seconds.
+INFO: quick_test.py:64 7580.422 msgs/s. 0.925 msgs/s/sender.
+INFO: quick_test.py:63 Sending 163840 message with 16384 senders took 10.977 seconds.
+INFO: quick_test.py:64 14926.270 msgs/s. 0.911 msgs/s/sender.
+INFO: quick_test.py:63 Sending 327680 message with 32768 senders took 10.970 seconds.
+INFO: quick_test.py:64 29870.095 msgs/s. 0.912 msgs/s/sender.
+INFO: quick_test.py:63 Sending 655360 message with 65536 senders took 11.952 seconds.
+INFO: quick_test.py:64 54834.197 msgs/s. 0.837 msgs/s/sender.
+INFO: quick_test.py:63 Sending 1310720 message with 131072 senders took 27.511 seconds.
+INFO: quick_test.py:64 47642.894 msgs/s. 0.363 msgs/s/sender.
+INFO: quick_test.py:63 Sending 2621440 message with 262144 senders took 64.645 seconds.
+INFO: quick_test.py:64 40551.513 msgs/s. 0.155 msgs/s/sender.
+INFO: quick_test.py:63 Sending 5242880 message with 524288 senders took 122.883 seconds.
+INFO: quick_test.py:64 42665.778 msgs/s. 0.081 msgs/s/sender.
+INFO: quick_test.py:63 Sending 10485760 message with 1048576 senders took 234.783 seconds.
+INFO: quick_test.py:64 44661.547 msgs/s. 0.043 msgs/s/sender.
+INFO: quick_test.py:63 Sending 20971520 message with 2097152 senders took 479.722 seconds.
+INFO: quick_test.py:64 43715.963 msgs/s. 0.021 msgs/s/sender.
+
+________________________________________________________
+Executed in   18.93 mins    fish           external
+   usr time   16.36 mins  343.00 micros   16.36 mins
+   sys time    0.08 mins  161.00 micros    0.08 mins

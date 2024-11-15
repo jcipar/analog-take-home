@@ -1,0 +1,28 @@
+[project]
+name = "analog-take-home"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.9.2",
+    "numpy>=2.1.3",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.13.0",
+    "pylsp-mypy>=0.6.9",
+    "python-lsp-ruff>=2.2.2",
+    "python-lsp-server[all]>=1.12.0",
+]
+
+[tool.mypy]
+strict = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_return_any = true
+
