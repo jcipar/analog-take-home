@@ -1,3 +1,4 @@
+import broker
 import producer
 import re
 from sms_message import SmsMessage
@@ -16,16 +17,18 @@ def validate_message(msg: SmsMessage) -> None:
 
 def test_random_message() -> None:
     collector = stats_collector.StatsCollector()
-    prod = producer.SmsMessageProducer(collector)
+    br = broker.MessageBroker(10)
+    prod = producer.SmsMessageProducer(br, collector)
     msg = prod.generate_random_message()
     validate_message(msg)
 
 
 
-def test_message_batch() -> None:
+async def test_message_batch() -> None:
     collector = stats_collector.StatsCollector()
-    prod = producer.SmsMessageProducer(collector)
-    batch = prod.generate_message_batch(25)
+    br = broker.MessageBroker(10)
+    prod = producer.SmsMessageProducer(br, collector)
+    batch = await prod.generate_message_batch(25)
     assert len(batch.messages) == 25
     for msg in batch.messages:
         validate_message(msg)

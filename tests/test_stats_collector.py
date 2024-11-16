@@ -13,8 +13,7 @@ async def test_stats_collector() -> None:
     num_failed = random.randint(2,20)
     times: List[float] = []
 
-    for i in range(num_produced):
-        await collector.log_produced()
+    await collector.log_produced(num_produced)
     for i in range(num_sent):
         t = max(0, random.normalvariate(1, 0.1))
         await collector.log_sent(t)

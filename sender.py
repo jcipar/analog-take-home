@@ -4,6 +4,7 @@ from enum import Enum
 import logging
 import random
 
+from broker import MessageBroker
 from sms_message import SmsMessage
 from stats_collector import StatsCollector
 
@@ -23,12 +24,22 @@ class SendConfig:
 
 
 class Sender:
-    def __init__(self, collector: StatsCollector, config: SendConfig | None = None) -> None:
+    def __init__(self, broker: MessageBroker, collector: StatsCollector, config: SendConfig | None = None) -> None:
         if config is None:
             self.config = SendConfig()
         else:
             self.config = config
+        self.broker = broker
         self.collector = collector
+
+    async def consume_messages(self) -> None:
+        while True:
+            maybe_batch = await self.broker.get_batch()
+            if maybe_batch is None:
+                break
+            await self.collector.log_dqueued(len(maybe_batch.messages))
+            for msg in maybe_batch.messages:
+                await self.send_message(msg)
 
     async def send_message(self, msg: SmsMessage) -> SendResult:
         # Sleep first: assume even a failed send takes time

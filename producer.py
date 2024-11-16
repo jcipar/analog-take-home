@@ -1,20 +1,38 @@
+import asyncio
 import random
 import string
 from typing import List
 
+from broker import MessageBroker
 from sms_message import SmsMessage, MessageBatch
 from stats_collector import StatsCollector
 
 
 class SmsMessageProducer:
-    def __init__(self, stats_collector: StatsCollector, message_length:int =100) -> None:
-        self.message_length = 100
+    def __init__(
+        self,
+        broker: MessageBroker,
+        stats_collector: StatsCollector,
+        message_length: int = 100,
+    ) -> None:
+        self.message_length = message_length
+        self.broker = broker
         self.stats_collector = stats_collector
 
-    def generate_message_batch(self, batch_size: int) -> MessageBatch:
+    async def send_multiple_batches(self, batch_count: int, batch_size: int) -> None:
+        for i in range(batch_count):
+            batch = await self.generate_message_batch(batch_size)
+            await self.broker.put_batch(batch)
+            await self.stats_collector.log_produced(batch_size)
+
+    async def generate_message_batch(self, batch_size: int) -> MessageBatch:
         messages: List[SmsMessage] = []
         for i in range(batch_size):
             messages.append(self.generate_random_message())
+            # # TODO: tunable sleep frequency
+            # if (i+1) % 10 == 0:
+            #     # Yield the processor so other coroutines can run
+            #     await asyncio.sleep(0)
         return MessageBatch(messages)
 
     def generate_random_message(self) -> SmsMessage:
