@@ -1,0 +1,15 @@
+[messages]
+message_count = 7_000_000
+message_length = 100
+
+[producer]
+producer_count = 1
+batch_size = 10
+
+[sender]
+sender_count = 50_000
+send_time_mean = 1.0
+send_time_stddev = 0.1
+
+[monitor]
+print_frequency = 2
