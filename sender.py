@@ -24,7 +24,12 @@ class SendConfig:
 
 
 class Sender:
-    def __init__(self, broker: MessageBroker, collector: StatsCollector, config: SendConfig | None = None) -> None:
+    def __init__(
+        self,
+        broker: MessageBroker,
+        collector: StatsCollector,
+        config: SendConfig | None = None,
+    ) -> None:
         if config is None:
             self.config = SendConfig()
         else:

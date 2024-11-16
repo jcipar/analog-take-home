@@ -2,35 +2,33 @@ import asyncio
 import math
 from typing import List
 
+import config
 from stats_collector import StatsCollector
 from broker import MessageBroker
 from sender import Sender
 from producer import SmsMessageProducer
 import time
-import gc
-from typing import Dict, Any
 
 
 async def main() -> None:
+    conf = config.read_config()
+    num_batches = math.ceil(conf.message_count / conf.batch_size / conf.producer_count)
     collector = StatsCollector()
     # producer = SmsMessageProducer(broker, collector)
     # prod_task = asyncio.create_task(produce_then_stop(broker, producer, 1_000_000, 1))
-    num_messages = 7_000_000
-    num_producers = 1
-    batch_size = 10
-    num_batches = math.ceil(num_messages / num_producers / batch_size)
-    num_consumers = 50_000
-    broker = MessageBroker(num_consumers)  # FIXME: config for this
-    print(f"Producing {num_messages} messaging in {num_producers} producers.")
-    print(f"Batch size is {batch_size}, batch count {num_batches}")
+    broker = MessageBroker(conf.sender_count)
+    print(
+        f"Producing {conf.message_count} messaging in {conf.producer_count} producers."
+    )
+    print(f"Batch size is {conf.batch_size}, batch count {num_batches}")
     prod_task = parallel_producers(
-        num_producers, collector, broker, num_batches, batch_size
+        conf.producer_count, collector, broker, num_batches, conf.batch_size
     )
     print("Started producers")
     print_task = asyncio.create_task(print_stats(collector, 2))
     print("Started monitor")
     consume_task = asyncio.create_task(
-        parallel_senders(num_consumers, collector, broker)
+        parallel_senders(conf.sender_count, collector, broker)
     )
     print("Started consumers")
     await asyncio.gather(prod_task, consume_task, return_exceptions=True)
@@ -65,6 +63,7 @@ async def parallel_producers(
         tasks.append(task)
     await asyncio.gather(*tasks, return_exceptions=True)
     broker.shutdown()
+
 
 async def print_stats(collector: StatsCollector, sleep_time: float) -> None:
     last_done = 0

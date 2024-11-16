@@ -31,11 +31,12 @@ def _read_config_from_string(config_str: str) -> Config:
 
 
 def _parse_config(raw_config: Dict[str, Any]) -> Config:
-    def get_int(section:str, name:str, default: int) -> int:
+    def get_int(section: str, name: str, default: int) -> int:
         return int(raw_config.get(section, {}).get(name, default))
-    def get_float(section:str, name:str, default: float) -> float:
+
+    def get_float(section: str, name: str, default: float) -> float:
         return float(raw_config.get(section, {}).get(name, default))
-    
+
     return Config(
         message_count=get_int("messages", "message_count", 1_000),
         message_length=get_int("messages", "message_length", 100),

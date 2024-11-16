@@ -23,7 +23,6 @@ def test_random_message() -> None:
     validate_message(msg)
 
 
-
 async def test_message_batch() -> None:
     collector = stats_collector.StatsCollector()
     br = broker.MessageBroker(10)

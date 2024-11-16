@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class MessagingStats:
     produced: int
@@ -43,10 +44,9 @@ class StatsCollector:
         else:
             avg = 0
         return MessagingStats(
-            produced = self.produced,
+            produced=self.produced,
             dequeued=self.dequeued,
-            sent = self.sent,
-            failed = self.failed,
+            sent=self.sent,
+            failed=self.failed,
             average_time=avg,
         )
-        

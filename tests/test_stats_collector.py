@@ -5,12 +5,13 @@ import pytest
 
 import stats_collector
 
+
 async def test_stats_collector() -> None:
     collector = stats_collector.StatsCollector()
 
     num_produced = random.randint(2, 20)
-    num_sent = random.randint(2,20)
-    num_failed = random.randint(2,20)
+    num_sent = random.randint(2, 20)
+    num_failed = random.randint(2, 20)
     times: List[float] = []
 
     await collector.log_produced(num_produced)
