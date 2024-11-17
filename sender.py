@@ -17,8 +17,6 @@ class SendResult(Enum):
     FAILURE = (1,)
 
 
-
-
 class Sender:
     def __init__(
         self,
@@ -42,7 +40,9 @@ class Sender:
     async def send_message(self, msg: SmsMessage) -> SendResult:
         # Sleep first: assume even a failed send takes time
         send_time = max(
-            random.normalvariate(self.config.send_time_mean, self.config.send_time_stddev),
+            random.normalvariate(
+                self.config.send_time_mean, self.config.send_time_stddev
+            ),
             0,
         )
         await asyncio.sleep(send_time)
