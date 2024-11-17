@@ -8,14 +8,14 @@ class Config:
     # TODO: This is enough for a demo, but we would probably
     # want something with a bit of namespacing for a real
     # application.
-    message_count: int
-    message_length: int
-    producer_count: int
-    batch_size: int
-    sender_count: int
-    send_time_mean: float
-    send_time_stddev: float
-    print_frequency: int
+    message_count: int = 1000
+    message_length: int = 100
+    producer_count: int = 1
+    batch_size: int = 1
+    sender_count: int = 1
+    send_time_mean: float = 1.0
+    send_time_stddev: float = 0.1
+    print_frequency: int = 2
 
 
 def read_config(filename: str = "config.toml") -> Config:

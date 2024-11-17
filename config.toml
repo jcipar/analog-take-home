@@ -7,9 +7,9 @@ producer_count = 1
 batch_size = 10
 
 [sender]
-sender_count = 50_000
-send_time_mean = 1.0
-send_time_stddev = 0.1
+sender_count = 5_000
+send_time_mean = 0.1
+send_time_stddev = 0.01
 
 [monitor]
 print_frequency = 2
