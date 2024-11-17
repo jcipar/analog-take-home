@@ -4,7 +4,7 @@ This simulates a system for sending many SMS alerts. It must include producer pr
 To simplify building and running the system, it primarily uses Python standard library components, but this document indicates a few components that might be replaced by off-the-shelf parts in a larger-scale distrubuted version.
 
 ## Overall Design
-![System diagram showing the 5 components described below](figures/system-diagram.png)
+![System diagram showing the 5 components described below](figures/analog-system-diagram.png)
 
 The system consists of 5 components, shown in the diagram above and documented in detail in their own sections below.
 1. **Message Broker**: Responsible for moving messages between producers and senders.
