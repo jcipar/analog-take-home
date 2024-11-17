@@ -5,6 +5,7 @@ import logging
 import random
 
 from broker import MessageBroker
+from config import Config
 from sms_message import SmsMessage
 from stats_collector import StatsCollector
 
@@ -16,24 +17,16 @@ class SendResult(Enum):
     FAILURE = (1,)
 
 
-@dataclass
-class SendConfig:
-    failure_rate: float = 0.1
-    mean_send_time: float = 1.0
-    std_send_time: float = 0.1
 
 
 class Sender:
     def __init__(
         self,
+        conf: Config,
         broker: MessageBroker,
         collector: StatsCollector,
-        config: SendConfig | None = None,
     ) -> None:
-        if config is None:
-            self.config = SendConfig()
-        else:
-            self.config = config
+        self.config = conf
         self.broker = broker
         self.collector = collector
 
@@ -49,11 +42,11 @@ class Sender:
     async def send_message(self, msg: SmsMessage) -> SendResult:
         # Sleep first: assume even a failed send takes time
         send_time = max(
-            random.normalvariate(self.config.mean_send_time, self.config.std_send_time),
+            random.normalvariate(self.config.send_time_mean, self.config.send_time_stddev),
             0,
         )
         await asyncio.sleep(send_time)
-        if random.random() < self.config.failure_rate:
+        if random.random() < self.config.send_failure_rate:
             await self.collector.log_failed(send_time)
             log.debug("Send failed")
             return SendResult.FAILURE

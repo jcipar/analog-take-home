@@ -16,6 +16,7 @@ batch_size = 11
 sender_count = 400
 send_time_mean = 0.1
 send_time_stddev = 0.01
+send_failure_rate = 0.5
 
 [monitor]
 print_frequency = 2
@@ -34,4 +35,5 @@ def test_config() -> None:
         assert cfg.sender_count == 400
         assert cfg.send_time_mean == pytest.approx(0.1)
         assert cfg.send_time_stddev == pytest.approx(0.01)
+        assert cfg.send_failure_rate == pytest.approx(0.5)
         assert cfg.print_frequency == 2

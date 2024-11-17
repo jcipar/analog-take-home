@@ -15,6 +15,7 @@ class Config:
     sender_count: int = 1
     send_time_mean: float = 1.0
     send_time_stddev: float = 0.1
+    send_failure_rate: float = 0.1
     print_frequency: int = 2
 
 
@@ -45,5 +46,6 @@ def _parse_config(raw_config: Dict[str, Any]) -> Config:
         sender_count=get_int("sender", "sender_count", 50_000),
         send_time_mean=get_float("sender", "send_time_mean", 1.0),
         send_time_stddev=get_float("sender", "send_time_stddev", 0.1),
+        send_failure_rate=get_float("sender", "send_failure_rate", 0.1),
         print_frequency=get_int("monitor", "print_frequency", 2),
     )

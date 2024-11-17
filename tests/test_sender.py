@@ -1,4 +1,5 @@
 import broker
+import config
 import producer
 import sender
 import stats_collector
@@ -7,9 +8,9 @@ import stats_collector
 async def test_sends_messages() -> None:
     collector = stats_collector.StatsCollector()
     br = broker.MessageBroker(10)
-    conf = sender.SendConfig(mean_send_time=0.01)
-    send = sender.Sender(br, collector, conf)
-    prod = producer.SmsMessageProducer(br, collector)
+    conf = config.Config()
+    send = sender.Sender(conf, br, collector)
+    prod = producer.SmsMessageProducer(conf, br, collector)
     msg = prod.generate_random_message()
     await send.send_message(msg)
     stats = await collector.get_stats()
@@ -19,9 +20,9 @@ async def test_sends_messages() -> None:
 async def test_stops_when_empty() -> None:
     collector = stats_collector.StatsCollector()
     br = broker.MessageBroker(10)
-    conf = sender.SendConfig(mean_send_time=0.01)
-    send = sender.Sender(br, collector, conf)
-    prod = producer.SmsMessageProducer(br, collector)
+    conf = config.Config(send_time_mean=0.01, send_time_stddev=0.001)
+    send = sender.Sender(conf, br, collector)
+    prod = producer.SmsMessageProducer(conf, br, collector)
 
     await prod.send_multiple_batches(10, 10)
     br.shutdown()

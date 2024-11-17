@@ -1,12 +1,14 @@
 import broker
+import config
 import producer
 import stats_collector
 
 
 async def test_round_trip() -> None:
+    conf = config.Config()
     collector = stats_collector.StatsCollector()
     br = broker.MessageBroker(10)
-    prod = producer.SmsMessageProducer(br, collector)
+    prod = producer.SmsMessageProducer(conf, br, collector)
     batch1 = await prod.generate_message_batch(25)
     batch2 = await prod.generate_message_batch(25)
 
