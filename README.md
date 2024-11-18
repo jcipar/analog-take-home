@@ -3,6 +3,11 @@ This program simulates a system for sending many SMS alerts. It includes multipl
 
 To simplify building and running the system, it primarily uses Python standard library components, but this document indicates a few components that might be replaced by off-the-shelf parts in a larger-scale distrubuted version.
 
+## Running
+Using the `uv` tool, run with `uv run main.py`.
+
+Run tests with `uv run pytest`
+
 ## Overall Design
 ![System diagram showing the 5 components described below](figures/analog-system-diagram.png)
 
