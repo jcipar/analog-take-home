@@ -1,6 +1,7 @@
 [messages]
 message_count = 7_000_000
-message_length = 100
+min_message_length = 50
+max_message_length = 100
 
 [producer]
 producer_count = 4
@@ -14,3 +15,6 @@ send_failure_rate = 0.1
 
 [monitor]
 print_frequency = 2
+
+[broker]
+max_queued_batches = 10_000

@@ -19,7 +19,7 @@ class Application:
         self.config = config.read_config(self.config_file_name)
         self.stats_collector = stats_collector.StatsCollector()
         # TODO: add a separate config for message broker queue size
-        self.broker = broker.MessageBroker(max_pending_batches=self.config.sender_count)
+        self.broker = broker.MessageBroker(self.config)
         self.monitor = monitor.Monitor(self.config, self.stats_collector)
 
         self.monitor_task = self.monitor.run()

@@ -1,12 +1,13 @@
 import asyncio
 
+from config import Config
 from sms_message import MessageBatch
 
 
 class MessageBroker:
-    def __init__(self, max_pending_batches: int) -> None:
-        self.max_pending_batches = max_pending_batches
-        self.queue: asyncio.Queue[MessageBatch] = asyncio.Queue(max_pending_batches)
+    def __init__(self, conf: Config) -> None:
+        self.config = conf
+        self.queue: asyncio.Queue[MessageBatch] = asyncio.Queue(self.config.max_queued_batches)
 
     async def put_batch(self, batch: MessageBatch) -> None:
         await self.queue.put(batch)

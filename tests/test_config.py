@@ -6,7 +6,8 @@ import config
 cfg_str = """
 [messages]
 message_count = 12
-message_length = 10
+min_message_length = 2
+max_message_length = 10
 
 [producer]
 producer_count = 2
@@ -20,6 +21,9 @@ send_failure_rate = 0.5
 
 [monitor]
 print_frequency = 2
+
+[broker]
+max_queued_batches = 300
 """
 
 
@@ -29,7 +33,8 @@ def test_config() -> None:
         fp.close()
         cfg = config.read_config(fp.name)
         assert cfg.message_count == 12
-        assert cfg.message_length == 10
+        assert cfg.min_message_length == 2
+        assert cfg.max_message_length == 10
         assert cfg.producer_count == 2
         assert cfg.batch_size == 11
         assert cfg.sender_count == 400
@@ -37,3 +42,4 @@ def test_config() -> None:
         assert cfg.send_time_stddev == pytest.approx(0.01)
         assert cfg.send_failure_rate == pytest.approx(0.5)
         assert cfg.print_frequency == 2
+        assert cfg.max_queued_batches == 300

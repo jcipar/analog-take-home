@@ -25,8 +25,8 @@ class SmsMessageProducer:
             batch = await self.generate_message_batch(batch_size)
             await self.broker.put_batch(batch)
             await self.stats_collector.log_produced(batch_size)
-            # # TODO: tunable sleep frequency
-            if (i+1) % 10 == 0:
+            # TODO: tunable sleep frequency
+            if (i + 1) % 10 == 0:
                 # Yield the processor so other coroutines can run
                 await asyncio.sleep(0)
 
@@ -38,7 +38,10 @@ class SmsMessageProducer:
 
     def generate_random_message(self) -> SmsMessage:
         dest = self._rand_phone_number()
-        msg = self._rand_string(self.config.message_length)
+        msg_length = random.randint(
+            self.config.min_message_length, self.config.max_message_length
+        )
+        msg = self._rand_string(msg_length)
         return SmsMessage(destination=dest, message=msg)
 
     def _rand_phone_number(self) -> str:

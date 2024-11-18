@@ -7,8 +7,8 @@ import stats_collector
 
 async def test_sends_messages() -> None:
     collector = stats_collector.StatsCollector()
-    br = broker.MessageBroker(10)
-    conf = config.Config()
+    conf = config.Config(max_queued_batches=10)
+    br = broker.MessageBroker(conf)
     send = sender.Sender(conf, br, collector)
     prod = producer.SmsMessageProducer(conf, br, collector)
     msg = prod.generate_random_message()
@@ -19,8 +19,8 @@ async def test_sends_messages() -> None:
 
 async def test_stops_when_empty() -> None:
     collector = stats_collector.StatsCollector()
-    br = broker.MessageBroker(10)
-    conf = config.Config(send_time_mean=0.01, send_time_stddev=0.001)
+    conf = config.Config(send_time_mean=0.01, send_time_stddev=0.001, max_queued_batches=10)
+    br = broker.MessageBroker(conf)
     send = sender.Sender(conf, br, collector)
     prod = producer.SmsMessageProducer(conf, br, collector)
 
