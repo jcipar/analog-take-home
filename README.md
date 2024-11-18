@@ -85,3 +85,6 @@ In a larger-scale version of the system, there could be multiple monitors with d
 **Main**: `main.py` includes the usual `if __name__ == "__main__"` start-up code.
 
 **`config.toml`**: Configuration file for tests.
+
+## Efficiency of Rust Version
+Out of curiosity, I wanted to see how much the choice of Python impacts the performance of the system. I wrote a simple version of the quick test in Rust using the Smol async library. This is in the `quick_test.rs` file. With some minimal tuning it was able to get over 1.3 million messages per second, about 27 times faster than the Python version. This is fast enough to send a message to everyone in the US in under 5 minutes. Of course if we were sending that many messages we would probably be hitting other bottlenecks in the system that actually does the sending, but the scalability of the message passing component would not be the issue anymore.
