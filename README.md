@@ -71,5 +71,10 @@ The monitor is implmented in the class `monitor.Monitor` in file `monitor.py`. T
 
 In a larger-scale version of the system, there could be multiple monitors with different purposes: a web-based gui could show real-time graphs to users, an alerting system could trigger alerts due to anomalous behavior, such as no messages sent even when there are pending messages in the queue, and a historical logger could save summary statistics to a log file.
 
-### Application
-The class `application.Application` in `application.py` ties these all together. It creates instances of the different components, starts the async tasks, waits for them to finish, and finally cancels the Monitor task.
+
+### Other Code
+**Config**: `config.py` contains a dataclass `Config` to store the configuration for the application. It also contains methods `read_config(filename: str)` and `read_config_from_string(config_string :str)` to parse a `toml` file and return a `Config`.
+
+**Application**: The class `Application` in `application.py` ties these all together. It creates instances of the different components, starts the async tasks, waits for them to finish, and finally cancels the Monitor task.
+
+**Main**: `main.py` includes the usual `if __name__ == "__main__"` start-up code.
