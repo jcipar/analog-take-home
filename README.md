@@ -83,3 +83,5 @@ In a larger-scale version of the system, there could be multiple monitors with d
 **Application**: The class `Application` in `application.py` ties these all together. It creates instances of the different components, starts the async tasks, waits for them to finish, and finally cancels the Monitor task.
 
 **Main**: `main.py` includes the usual `if __name__ == "__main__"` start-up code.
+
+**`config.toml`**: Configuration file for tests.
